@@ -242,29 +242,29 @@
       const rgb = document.getElementById("favcolor");
 
       const changeColorOfLayerText = (color) => {
-        let image_text = document.getElementsByClassName("layer-text");
+        let layer_text = document.getElementsByClassName("layer-text");
 
-        for (let i = 0; i < image_text.length; ++i) {
-          image_text.item(i).setAttribute("fill", color);
+        for (let i = 0; i < layer_text.length; ++i) {
+          layer_text.item(i).setAttribute("fill", color);
         }
       };
 
       const changeInputLayer = (color) => {
-        let image_text = document.getElementsByClassName("input-layer");
-        for (let i = 0; i < image_text.length; ++i) {
-          image_text.item(i).setAttribute("fill", color);
+        let input_layer = document.getElementsByClassName("input-layer");
+        for (let i = 0; i < input_layer.length; ++i) {
+          input_layer.item(i).setAttribute("fill", color);
         }
       };
       const changeOutputLater = (color) => {
-        let image_text = document.getElementsByClassName("output-layer");
-        for (let i = 0; i < image_text.length; ++i) {
-          image_text.item(i).setAttribute("fill", color);
+        let output_layer = document.getElementsByClassName("output-layer");
+        for (let i = 0; i < output_layer.length; ++i) {
+          output_layer.item(i).setAttribute("fill", color);
         }
       };
       const changeHiddenLayer = (color) => {
-        let image_text = document.getElementsByClassName("hidden-layer");
-        for (let i = 0; i < image_text.length; ++i) {
-          image_text.item(i).setAttribute("fill", color);
+        let hidden_layer = document.getElementsByClassName("hidden-layer");
+        for (let i = 0; i < hidden_layer.length; ++i) {
+          hidden_layer.item(i).setAttribute("fill", color);
         }
       };
 
@@ -303,7 +303,9 @@
         const red = +parseInt("0x" + rgb.value.slice(1, 3));
         const green = +parseInt("0x" + rgb.value.slice(3, 5));
         const blue = +parseInt("0x" + rgb.value.slice(5, 7));
-
+        
+        
+        // Consulta al servicio API REST 
         fetch(
           `http://localhost:5000/api/v1/color?red=${red}&blue=${blue}&green=${green}`
         )

@@ -31,6 +31,7 @@ class NeuronalNetwork:
         for idx in range(0,len(self.weight_hidden_layers) - 1):
             self.layers_results.append(self.sigmoid(np.dot( self.layers_results[idx], self.weight_hidden_layers[idx+1]))) 
 
+        # Retorna el valor de la función de activación de la ultima capa oculta
         return self.layers_results[-1]
 
     def feedforward(self):
@@ -40,16 +41,20 @@ class NeuronalNetwork:
     def backPropagation(self):
         # Error de la capa de salida
         self.predicted_error_output = 2 * (self.output - self.output_layer_result) * self.sigmoid_derivative(self.output_layer_result)
-        self.error_hidden_layers    = []
         error_hidden_layer          = self.predicted_error_output.dot(self.weight_output_layer.T)
 
+        # Se crea las capas de error para cada 
+        self.error_hidden_layers    = []
         self.error_hidden_layers.append(2 * error_hidden_layer * self.sigmoid_derivative(self.layers_results[-1]))
 
+
+        # Se añade los valores de la capa de error, empezando por la última capa
         for i in reversed(range(0,len(self.layers_results) -1 )):
             idx                 = len(self.error_hidden_layers) -1
             error_hidden_layer  = self.error_hidden_layers[idx].dot(self.weight_hidden_layers[i+1].T)
             self.error_hidden_layers.append(2 * error_hidden_layer * self.sigmoid_derivative(self.layers_results[i]))
-
+        
+        # Se revierte la capa para que sean evaluadaas en orden en la actualizacion de pesos
         self.error_hidden_layers.reverse()
         
 

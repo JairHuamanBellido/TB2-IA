@@ -36,7 +36,7 @@ nn.train(50000)
 app = Flask(__name__)
 CORS(app)
 @app.route('/api/v1/color', methods=['GET'])
-def api_astar():
+def api_color():
     red = float(request.args.get('red')) / 255
     green = float(request.args.get('green')) / 255
     blue = float(request.args.get('blue')) / 255
